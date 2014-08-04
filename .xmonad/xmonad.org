@@ -1,0 +1,69 @@
+* Imports
+** Main imports
+#+NAME: main-imports
+#+BEGIN_SRC haskell :tangle no
+  import XMonad
+  import Data.Monoid
+  import System.Exit
+#+END_SRC
+
+** Additional imports
+#+NAME: additional-imports
+#+BEGIN_SRC haskell :tangle no
+  import XMonad.StackSet
+  import qualified Data.Map as Map
+#+END_SRC
+   
+* Constant definitions
+#+NAME: def
+#+BEGIN_SRC haskell :noweb yes
+  <<def-terminal>>
+  <<def-borders>>
+  <<def-modMask>>
+
+#+END_SRC
+
+** Terminal
+#+NAME: def-terminal
+#+BEGIN_SRC haskell
+  myTerminal :: String
+  myTerminal = "urxvt"
+#+END_SRC
+   
+** Borders
+#+NAME: def-borders
+#+BEGIN_SRC haskell
+myBorderWidth :: Int
+myBorderWidth = 1
+#+END_SRC
+   
+** Super key
+#+NAME: def-modMask
+#+BEGIN_SRC haskell
+myModMask :: KeyMask
+myModMask = mod4Mask
+#+END_SRC
+
+* Entry point
+#+NAME: main
+#+BEGIN_SRC haskell
+  main = xmonad defaultConfig
+          { terminal = myTerminal
+          , modMask = myModMask
+          , borderWidth = myBorderWidth
+          }
+
+#+END_SRC
+
+#+NAME: full src
+#+BEGIN_SRC haskell :noweb yes :tangle xmonad.hs
+  <<main-imports>>
+  <<additional-imports>>
+
+  <<def>>
+
+  <<main>
+
+#+END_SRC   
+
+
