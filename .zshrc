@@ -1,3 +1,4 @@
+NOTITLE=1
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -34,6 +35,10 @@ export PATH
 
 setopt AUTO_NAME_DIRS
 qinqu=~/workspace/haskell/q-inqu
+henge=~/workspace/haskell/henge
+boom=~/workspace/haskell/henge/games/boom
+hsys=~/workspace/haskell/henge/hsys
+halo=~/workspace/haskell/henge/halo
 
 setopt AUTO_CD
 setopt CORRECT
@@ -41,10 +46,6 @@ setopt CORRECT_ALL
 
 [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" history-beginning-search-forward
 [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" history-beginning-search-backward
-
-autoload -U promptinit
-promptinit
-prompt clint
 
 # dirstack
 DIRSTACKFILE="$HOME/.cache/zsh/dirs"
@@ -62,3 +63,5 @@ DIRSTACKSIZE=20
 setopt autopushd pushdsilent pushdtohome
 setopt pushdignoredups
 setopt pushdminus
+
+source /etc/zsh/.zshrc
