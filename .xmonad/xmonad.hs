@@ -6,6 +6,7 @@
 import XMonad
 import qualified XMonad as XM
 import qualified XMonad.StackSet as W
+import XMonad.Hooks.SetWMName
 import qualified Data.Map as M
 import XMonad.Util.EZConfig(additionalKeys)
 import System.Exit
@@ -74,12 +75,13 @@ main = do
         	, terminal = myTerminal
 		, workspaces = myWorkspaces
                 , focusFollowsMouse = False
+                , startupHook = setWMName "LG3D"
 		}
                 `additionalKeysP`
-                [ ("S-\\ h", namedScratchpadAction scratchpads "htop")
-                , ("S-\\ n", namedScratchpadAction scratchpads "notes")
-                , ("S-\\ c", namedScratchpadAction scratchpads "buildTerm")
-                , ("S-\\ x", namedScratchpadAction scratchpads "xmonad-config")
+                [ ("C-\\ h", namedScratchpadAction scratchpads "htop")
+                , ("C-\\ n", namedScratchpadAction scratchpads "notes")
+                , ("C-\\ c", namedScratchpadAction scratchpads "buildTerm")
+                , ("C-\\ x", namedScratchpadAction scratchpads "xmonad-config")
                 ]
 
 
@@ -91,7 +93,9 @@ myManageHook =
                 [[isFullscreen                  XM.--> doFullFloat
 		]]
                         )  XM.<+> manageDocks XM.<+> composeAll
-                [ (role =? "gimp-toolbox" <||> role =? "gimp-image-window") --> (ask >>= doF . W.sink)
+                [ (role =? "gimp-toolbox") --> (customFloating $ W.RationalRect 0.0 0.0 0.1 0.9)
+                , (role =? "gimp-image-window") --> (customFloating $ W.RationalRect 0.1 0.0 0.9 1)
+                , (title =? "Open-NARS v1.6.0") --> (defaultFloating) --customFloating $ W.RationalRect 0.0 0.0 0.2 1)
                 ]
         where
             role = stringProperty "WM_WINDOW_ROLE"
